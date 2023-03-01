@@ -7,6 +7,5 @@ a.generate_report()
 print ("Start with a cartography")
 a.cartography()
 a.show_item_map()
-print ("Winners: ")
-
 a.create_rules()
+a.rules_to_csv("rules.csv")

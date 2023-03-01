@@ -1,24 +1,26 @@
 from itertools import permutations, combinations
 from niaarm import Dataset, Feature, Rule
 from micronarm.item import Item
+import csv
 import sys
 
+
 class MicroNarm:
-     r"""Main class for microNARM approach.
+    r"""Main class for microNARM approach.
 
-    Args:
-        dataset (csv file): Dataset stored in csv file.
-        num_bins (int): Number which defines how many bins we create for numerical features.
-    """
+   Args:
+       dataset (csv file): Dataset stored in csv file.
+       num_bins (int): Number which defines how many bins we create for numerical features.
+   """
 
-     def __init__(self, dataset, num_bins):
+    def __init__(self, dataset, num_bins):
         # load dataset from csv
         self.data = Dataset(dataset)
         self.num_bins = num_bins
         self.feat = []
         self.rules = []
 
-     def create_bins(self):
+    def create_bins(self):
         r"""Create bins.
 
         Note: The number of bins for categorical feature is equal to number of categories.
@@ -39,7 +41,7 @@ class MicroNarm:
                     occurences))
 
     # TODO min and max should be exact
-     def numerical_bin(self, min_val, max_val):
+    def numerical_bin(self, min_val, max_val):
         r"""Create bins for numerical feature."""
         val_range = (max_val - min_val) / (self.num_bins + 1)
         bins = []
@@ -48,7 +50,7 @@ class MicroNarm:
         return bins
 
     # create item/attribute map
-     def cartography(self):
+    def cartography(self):
         r"""Count the occurences"""
         item_map = []
         transactions = self.data.transactions.to_numpy()
@@ -64,39 +66,31 @@ class MicroNarm:
                                 transaction[i] < self.feat[i].bins[j + 1])):
                             self.feat[i].occurences[j] += 1
 
-     def generate_report(self):
+    def generate_report(self):
         for f in self.feat:
             print(f"Feat INFO:\n"
                   f"Name: {f.name}\n"
                   f"Bins: {f.bins}")
 
-     def show_item_map(self):
+    def show_item_map(self):
         for item in self.feat:
             print(f"Bin {item.name}:\n"
                   f"Bins: {item.bins}\n"
                   f"Occurences: {item.occurences}")
 
-     def build_rule(self, antecedent, consequent):
-        r"""Create rule consisting of antecedent and consequence"""
-        return Rule(
-            [antecedent],
-            [consequent],
-            transactions=self.data.transactions)
+    def ant_con(self, combination, cut):
+        ant = combination[:cut]
+        ant1 = []
+        for i in range(len(ant)):
+            ant1.append(ant[i])
+        con = combination[cut:]
+        con1 = []
+        for i in range(len(con)):
+            con1.append(con[i])
 
-     def evaluate_rules(self, rule):
-        r"""Print the support, confidence and lift of an association rule"""
-        print(rule)
-        print(f'Support: {rule.support}')
-        print(f'Confidence: {rule.confidence}')
-        print(f'Lift: {rule.lift}')
+        return ant1, con1
 
-     def ant_con(self, combination, cut):
-        print ("combination: ", combination)
-        ant = combination[0]
-        con = combination[cut:] #FIXME
-        return ant, con
-
-     def create_rules(self):
+    def create_rules(self):
         r"""Create new association rules."""
         items = []
         for item in self.feat:
@@ -110,19 +104,35 @@ class MicroNarm:
             else:
                 items.append(Feature(item.name,
                                      item.dtype,
-                                     min_val=item.bins[max_index - 1],
-                                     max_val=item.bins[max_index]))  # check again |
+                                     min_val=item.bins[max_index],
+                                     max_val=item.bins[max_index + 1]))  # check again |
 
         # create rules for the combination of 2, 3 and 4 items
 
-        for i in range(2, 5):
+        for i in range(2, 4):
             comb = combinations(items, i)
             if i == 2:
                 for j in list(comb):
-                    self.rules.append(self.build_rule(j[0], j[1]))
+                    rule = Rule([j[0]], [j[1]],
+                                transactions=self.data.transactions)
+                    if rule.support > 0.0:
+                        self.rules.append(rule)
             else:
                 for j in list(comb):
-                    for cut in range(1, i-1):
+                    for cut in range(1, i - 1):
                         ant, con = self.ant_con(j, cut)
-                        print ("Antecedent: ", ant, " Consequent: ", con)
-                        self.rules.append(self.build_rule(ant, con))
+                        rule = Rule(
+                            ant, con, transactions=self.data.transactions)
+                        if rule.support > 0.0:
+                            self.rules.append(rule)
+        self.rules.sort(key=lambda x: x.support, reverse=True)
+
+    def rules_to_csv(self, filename):
+        with open(filename, 'w',) as csvfile:
+            writer = csv.writer(csvfile)
+            # header of our csv file
+            writer.writerow(
+                ['Antecedent', 'Consequent', 'Support', 'Confidence'])
+            for rule in self.rules:
+                writer.writerow(
+                    [rule.antecedent, rule.consequent, rule.support, rule.confidence])
