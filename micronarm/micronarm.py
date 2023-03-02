@@ -13,10 +13,11 @@ class MicroNarm:
        num_bins (int): Number which defines how many bins we create for numerical features.
    """
 
-    def __init__(self, dataset, num_bins):
+    def __init__(self, dataset, num_bins, neighbour_threshold):
         # load dataset from csv
         self.data = Dataset(dataset)
         self.num_bins = num_bins
+        self.neighbour_threshold = neighbour_threshold
         self.feat = []
         self.rules = []
 
@@ -90,6 +91,31 @@ class MicroNarm:
 
         return ant1, con1
 
+    def if_neighbour(self, item, maxindex):
+        r"""If neighbour bin has a very similar occurence rate
+
+        Note: in this case we merge both bins"""
+        val_left = 0.0
+        val_right = 0.0
+        left, right = False, False
+        if maxindex > 0 and maxindex < len(item.occurences)-1:
+            # in the case both neighbours are within 20%
+            val_left = float(item.occurences[maxindex-1] / item.occurences[maxindex])
+            val_right = item.occurences[maxindex+1] / item.occurences[maxindex]
+
+        if maxindex == 0:
+            val_right = item.occurences[maxindex+1] / item.occurences[maxindex]
+
+        if maxindex == (len(item.occurences)-1):
+            val_left = float(item.occurences[maxindex-1] / item.occurences[maxindex])
+
+        if val_left > self.neighbour_threshold:
+            left = True
+        if val_right > self.neighbour_threshold:
+            right = True
+
+        return left, right
+
     def create_rules(self):
         r"""Create new association rules."""
         items = []
@@ -102,10 +128,17 @@ class MicroNarm:
                         item.dtype,
                         categories=item.bins[max_index]))
             else:
+                left, right = self.if_neighbour(item, max_index)
+                l = 0
+                r = 0
+                if left:
+                    l = l - 1
+                if right:
+                    r = r + 1
                 items.append(Feature(item.name,
                                      item.dtype,
-                                     min_val=item.bins[max_index],
-                                     max_val=item.bins[max_index + 1]))  # check again |
+                                     min_val=item.bins[max_index+l],
+                                     max_val=item.bins[max_index + 1 + r]))  # check again |
 
         # create rules for the combination of 2, 3 and 4 items
 
