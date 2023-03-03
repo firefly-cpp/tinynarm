@@ -126,19 +126,20 @@ class MicroNarm:
                     Feature(
                         item.name,
                         item.dtype,
-                        categories=item.bins[max_index]))
+                        categories=[item.bins[max_index]]))
+                #print ("delam, ", item.bins[max_index])
             else:
-                left, right = self.if_neighbour(item, max_index)
-                l = 0
-                r = 0
-                if left:
-                    l = l - 1
-                if right:
-                    r = r + 1
+                #left, right = self.if_neighbour(item, max_index)
+                #l = 0
+                #r = 0
+                #if left:
+                #    l = l - 1
+                #if right:
+                #    r = r + 1
                 items.append(Feature(item.name,
                                      item.dtype,
-                                     min_val=item.bins[max_index+l],
-                                     max_val=item.bins[max_index + 1 + r]))  # check again |
+                                     min_val=item.bins[max_index], # + l
+                                     max_val=item.bins[max_index + 1])) # + r  # check again |
 
         # create rules for the combination of 2, 3 and 4 items
 
@@ -148,6 +149,7 @@ class MicroNarm:
                 for j in list(comb):
                     rule = Rule([j[0]], [j[1]],
                                 transactions=self.data.transactions)
+                    print ("Rule: ", j[0], j[1], " support: ", rule.support)
                     if rule.support > 0.0:
                         self.rules.append(rule)
             else:
