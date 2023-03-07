@@ -1,7 +1,7 @@
-from micronarm import MicroNarm
-from micronarm.item import Item
+from tinynarm import TinyNarm
+from tinynarm.item import Item
 
-a = MicroNarm("datasets/breast.csv", 5, 0.70)
+a = TinyNarm("datasets/nursery.csv", 5, 0.70)
 a.create_bins()
 a.generate_report()
 print ("Start with a cartography")

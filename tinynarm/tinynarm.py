@@ -1,11 +1,11 @@
 from itertools import permutations, combinations
 from niaarm import Dataset, Feature, Rule
-from micronarm.item import Item
+from tinynarm.item import Item
 import csv
 import sys
 
 
-class MicroNarm:
+class TinyNarm:
     r"""Main class for microNARM approach.
 
    Args:
@@ -149,7 +149,7 @@ class MicroNarm:
                 for j in list(comb):
                     rule = Rule([j[0]], [j[1]],
                                 transactions=self.data.transactions)
-                    print ("Rule: ", j[0], j[1], " support: ", rule.support)
+                    print ("Rule: ", j[0], "=>", j[1], " support: ", rule.support)
                     if rule.support > 0.0:
                         self.rules.append(rule)
             else:

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "micronarm"
+name = "tinynarm"
 version = "0.1.0"
 description = ""
 authors = ["Iztok Fister Jr. <iztok@iztok-jr-fister.eu>"]
