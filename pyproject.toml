@@ -1,8 +1,16 @@
 [tool.poetry]
 name = "tinynarm"
 version = "0.1.0"
-description = ""
+description = "Simplify numerical association rule mining"
 authors = ["Iztok Fister Jr. <iztok@iztok-jr-fister.eu>"]
+keywords = ['association rule mining', 'data science', 'numerical association rule mining']
+homepage = "https://gitlab.com/firefly-cpp/tinynarm"
+repository = "https://gitlab.com/firefly-cpp/tinynarm"
+readme = "README.md"
+
+include = [
+    { path="LICENSE", format="sdist" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"

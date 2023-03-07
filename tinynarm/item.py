@@ -1,6 +1,6 @@
 class Item:
-    def __init__(self, name, dtype, bins, occurences):
+    def __init__(self, name, dtype, intervals, occurences):
         self.name = name
         self.dtype = dtype
-        self.bins = bins
+        self.intervals = intervals
         self.occurences = occurences
