@@ -1,14 +1,13 @@
+from unittest import TestCase
 from tinynarm import TinyNarm
+from niaarm import Dataset
+import os
 
-# TinyNarm class expects two parameters
-# First parameter (5) defines how many intervals we create for numerical features.
-# Second parameter (0.70) defines the threshold for including a neighbour in our rule.
-a = TinyNarm("datasets/Abalone.csv", 5, 0.70)
-a.create_intervals()
-a.generate_report()
-print ("Start with a cartography")
-a.cartography()
-a.show_item_map()
-a.create_rules()
-a.rules_to_csv("rules.csv")
+class TestDataset(TestCase):
+    def setUp(self):
+        filename = os.path.join(os.path.dirname(__file__), "datasets", "Abalone.csv")
+        dataset = Dataset(filename)
+        self.transactions = dataset.transactions.to_numpy()
 
+    def test_len_dataset_correct(self):
+        self.assertEqual(len(self.transactions), 4177)
