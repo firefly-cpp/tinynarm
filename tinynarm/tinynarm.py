@@ -16,6 +16,7 @@ class TinyNarm:
     def __init__(self, dataset, num_intervals, neighbour_threshold):
         # load dataset from csv
         self.data = Dataset(dataset)
+        self.num_features = len(self.data.features)
 
         self.num_intervals = num_intervals
         self.neighbour_threshold = neighbour_threshold
@@ -43,10 +44,9 @@ class TinyNarm:
                     intervals,
                     occurences))
 
-    # TODO min and max should be exact
     def numerical_interval(self, min_val, max_val):
         r"""Create intervals for numerical feature."""
-        val_range = (max_val - min_val) / (self.num_intervals + 1)
+        val_range = (max_val - min_val) / (self.num_intervals)
         intervals = []
         for i in range(self.num_intervals + 1):
             intervals.append(min_val + (i * val_range))
@@ -134,21 +134,13 @@ class TinyNarm:
                                      min_val=item.intervals[max_index + l],
                                      max_val=item.intervals[max_index + 1 + r]))
 
-        # create rules for the combination of 2, 3 and 4 items
-
-        for i in range(2, 4):
+        # create rules for the combination of 3...,num_features
+        for i in range(2, self.num_features):
             comb = combinations(items, i)
             if i == 2:
                 for j in list(comb):
                     rule = Rule([j[0]], [j[1]],
                                 transactions=self.data.transactions)
-                    print(
-                        "Rule: ",
-                        j[0],
-                        "=>",
-                        j[1],
-                        " support: ",
-                        rule.support)
                     if rule.support > 0.0:
                         self.rules.append(rule)
             else:
@@ -159,17 +151,40 @@ class TinyNarm:
                             ant, con, transactions=self.data.transactions)
                         if rule.support > 0.0:
                             self.rules.append(rule)
+
         self.rules.sort(key=lambda x: x.support, reverse=True)
 
+    def calculate_fitness(self, support, confidence):
+        return (support + confidence) / 2
+
     def rules_to_csv(self, filename):
+        r"""Store rules to CSV file."""
         with open(filename, 'w',) as csvfile:
             writer = csv.writer(csvfile)
             # header of our csv file
-            writer.writerow(
-                ['Antecedent', 'Consequent', 'Support', 'Confidence'])
+            writer.writerow(['Antecedent', 'Consequent',
+                             'Support', 'Confidence', 'Fitness'])
             for rule in self.rules:
+                # calculate fitness (for comparison pursposes)
+                fitness = self.calculate_fitness(rule.support, rule.confidence)
+
                 writer.writerow(
-                    [rule.antecedent, rule.consequent, rule.support, rule.confidence])
+                    [rule.antecedent, rule.consequent, rule.support, rule.confidence, fitness])
+
+    def generate_statistics(self):
+        r"""Generate statistics for experimental purposes"""
+        fitness = 0.0
+        support = 0.0
+        confidence = 0.0
+        for rule in self.rules:
+            fitness += self.calculate_fitness(rule.support, rule.confidence)
+            support += rule.support
+            confidence += rule.confidence
+
+        print("Total rules: ", len(self.rules))
+        print("Average fitness: ", fitness / len(self.rules))
+        print("Average support: ", support / len(self.rules))
+        print("Average confidence: ", confidence / len(self.rules))
 
     def generate_report(self):
         for f in self.feat:
