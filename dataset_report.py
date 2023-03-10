@@ -7,5 +7,5 @@ if __name__ == '__main__':
     # load and preprocess the dataset from csv
     data = Dataset("datasets/Abalone.csv")
     # get dataset report
-    print(data)
+    print(data.name)
 

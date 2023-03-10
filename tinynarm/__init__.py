@@ -1,8 +1,12 @@
 from tinynarm.tinynarm import TinyNarm
 from tinynarm.item import Item
+from tinynarm.utils import Utils
+
 __all__ = [
     "TinyNarm",
-    "Item"
+    "Item",
+    "Discretization",
+    "Utils"
 ]
 
 __project__ = "tinynarm"
