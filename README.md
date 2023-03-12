@@ -1,4 +1,4 @@
-# micronarm
+# tinyNARM
 
 ## About
 
@@ -9,6 +9,32 @@ The current repository hosts a tinyNARM algorithm prototype initially developed 
 ## Classical NARM
 
 ## How does tinyNARM work?
+
+## Usage
+
+### Basic run
+
+```python
+from tinynarm import TinyNarm
+from tinynarm.utils import Utils
+
+tinynarm = TinyNarm("new_dataset.csv")
+tinynarm.create_rules()
+
+postprocess = Utils(a.rules)
+postprocess.rules_to_csv("rules.csv")
+postprocess.generate_statistics()
+```
+
+### Discretization
+
+```python
+from tinynarm.discretization import Discretization
+
+dataset = Discretization("datasets/sportydatagen.csv", 5)
+data = dataset.generate_dataset()
+dataset.dataset_to_csv(data, "new_dataset.csv")
+```
 
 ## NARM references
 

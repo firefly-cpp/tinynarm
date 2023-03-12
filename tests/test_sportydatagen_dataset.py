@@ -14,6 +14,7 @@ import os
 # 70.41666667,0.0,117,94.38214476,94.80000305,473,0.800003052,2.800003052
 # 74.13333333,17.48390039,97,125.3543787,175.6000061,263,107.0,112.7999954
 
+
 class TestSportydatagenDataset(TestCase):
     def setUp(self):
         filename = os.path.join(
@@ -32,7 +33,15 @@ class TestSportydatagenDataset(TestCase):
         assert len(self.features) == 8, "There should be 8 features"
 
     def test_features_name(self):
-        names = ['duration', 'distance', 'average_hr', 'average_altitude', 'max_altitude', 'calories', 'ascent', 'descent']
+        names = [
+            'duration',
+            'distance',
+            'average_hr',
+            'average_altitude',
+            'max_altitude',
+            'calories',
+            'ascent',
+            'descent']
         dataset_names = []
         for feat in self.features:
             dataset_names.append(feat.name)
@@ -40,7 +49,15 @@ class TestSportydatagenDataset(TestCase):
         assert names == dataset_names, "Name of features not correct"
 
     def test_features_dtypes(self):
-        types = ["float", "float", "int", "float", "float", "int", "float", "float"]
+        types = [
+            "float",
+            "float",
+            "int",
+            "float",
+            "float",
+            "int",
+            "float",
+            "float"]
         dataset_types = []
         for feat in self.features:
             dataset_types.append(feat.dtype)

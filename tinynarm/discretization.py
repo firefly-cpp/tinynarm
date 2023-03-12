@@ -50,6 +50,9 @@ class Discretization:
 
     def generate_dataset(self):
         r"""Create new dataset."""
+
+        self.create_intervals()
+
         transactions = self.data.transactions.to_numpy()
         discretized_transactions = []
         for transaction in transactions:

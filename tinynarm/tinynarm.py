@@ -55,6 +55,10 @@ class TinyNarm:
 
     def create_rules(self):
         r"""Create new association rules."""
+
+        self.create_features()
+        self.cartography()
+
         items = []
         for item in self.feat:
             max_index = item.occurences.index(max(item.occurences))

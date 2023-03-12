@@ -132,4 +132,4 @@ dmypy.json
 
 # Results of scripts (csv)
 rules.csv
-new_dataset.csv
+output.csv
