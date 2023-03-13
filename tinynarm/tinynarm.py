@@ -89,9 +89,3 @@ class TinyNarm:
             print(f"Feat INFO:\n"
                   f"Name: {f.name}\n"
                   f"Bins: {f.intervals}")
-
-    def show_item_map(self):
-        for item in self.feat:
-            print(f"Bin {item.name}:\n"
-                  f"Bins: {item.intervals}\n"
-                  f"Occurences: {item.occurences}")

@@ -5,11 +5,12 @@ import time
 # start timer -> for experimental purposes
 start = time.time()
 
-tinynarm = TinyNarm("new_dataset.csv")
-tinynarm.create_rules()
+tnarm = TinyNarm("new_dataset.csv")
+tnarm.create_rules()
 
 print("Program execution --- %s seconds ---" % (time.time() - start))
 
-postprocess = Utils(a.rules)
+postprocess = Utils(tnarm.rules)
 postprocess.rules_to_csv("rules.csv")
 postprocess.generate_statistics()
+postprocess.generate_stats_report(20)
