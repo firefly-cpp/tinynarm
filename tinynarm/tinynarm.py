@@ -3,7 +3,7 @@ from niaarm import Dataset, Feature, Rule
 from tinynarm.item import Item
 
 class TinyNarm:
-    r"""Main class for microNARM approach.
+    r"""Main class for tinyNARM approach.
 
    Args:
        dataset (csv file): Dataset stored in csv file.
@@ -18,7 +18,7 @@ class TinyNarm:
         self.feat = []
         self.rules = []
 
-    def create_features(self):
+    def prepare(self):
         for feature in self.data.features:
             intervals = feature.categories
             occurences = [0] * len(feature.categories)
@@ -31,7 +31,7 @@ class TinyNarm:
                     occurences))
 
     # create item/attribute map
-    def cartography(self):
+    def calculate_frequencies(self):
         r"""Count the occurences"""
         item_map = []
         transactions = self.data.transactions.to_numpy()
@@ -56,8 +56,8 @@ class TinyNarm:
     def create_rules(self):
         r"""Create new association rules."""
 
-        self.create_features()
-        self.cartography()
+        self.prepare()
+        self.calculate_frequencies()
 
         items = []
         for item in self.feat:

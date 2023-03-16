@@ -6,9 +6,23 @@ tinyNARM is an experimental effort in approaching/tailoring the classical Numeri
 
 The current repository hosts a tinyNARM algorithm prototype initially developed in Python for fast prototyping.
 
-## Classical NARM
+## Detailed insights
+The current version includes (but is not limited to) the following functions:
 
-## How does tinyNARM work?
+- loading datasets in CSV format,
+- discretizing numerical features to discrete classes,
+- association rule mining using the tinynarm approach,
+- easy comparison with the NiaARM approach.
+
+## Installation
+
+### pip
+
+Install tinyNARM with pip:
+
+```sh
+pip install tinynarm
+```
 
 ## Usage
 
@@ -21,7 +35,7 @@ from tinynarm.utils import Utils
 tinynarm = TinyNarm("new_dataset.csv")
 tinynarm.create_rules()
 
-postprocess = Utils(a.rules)
+postprocess = Utils(tinynarm.rules)
 postprocess.rules_to_csv("rules.csv")
 postprocess.generate_statistics()
 ```
