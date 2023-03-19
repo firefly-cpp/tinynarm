@@ -12,4 +12,4 @@ __all__ = [
 ]
 
 __project__ = "tinynarm"
-__version__ = '0.1.0'
+__version__ = '0.1.1'
