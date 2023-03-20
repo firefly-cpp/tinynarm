@@ -11,6 +11,7 @@ tnarm.create_rules()
 print("Program execution --- %s seconds ---" % (time.time() - start))
 
 postprocess = Utils(tnarm.rules)
+postprocess.add_fitness()
 postprocess.sort_rules()
 postprocess.rules_to_csv("rules.csv")
 postprocess.generate_statistics()
