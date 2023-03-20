@@ -1,0 +1,6 @@
+duration,distance,average_hr,average_altitude,max_altitude,calories,ascent,descent
+interval_1,interval_2,interval_2,interval_5,interval_5,interval_3,interval_4,interval_3
+interval_1,interval_3,interval_3,interval_5,interval_5,interval_2,interval_2,interval_2
+interval_4,interval_5,interval_5,interval_1,interval_2,interval_5,interval_5,interval_5
+interval_5,interval_1,interval_2,interval_1,interval_1,interval_5,interval_1,interval_1
+interval_5,interval_4,interval_1,interval_1,interval_1,interval_1,interval_2,interval_2

@@ -6,8 +6,17 @@ class Utils:
     def __init__(self, rules):
         self.rules = rules
 
+    # calculate fitness (for comparison purposes)
     def calculate_fitness(self, support, confidence):
         return (support + confidence) / 2
+
+    def add_fitness(self):
+        for rule in self.rules:
+            rule.fitness = self.calculate_fitness(rule.support, rule.confidence)
+
+    def sort_rules(self):
+        self.add_fitness()
+        self.rules.sort(key=lambda x: x.fitness, reverse=True)
 
     def rules_to_csv(self, filename):
         r"""Store rules to CSV file."""
@@ -16,11 +25,8 @@ class Utils:
             # header of our csv file
             writer.writerow(['Antecedent', 'Consequent', 'Fitness', 'Support', 'Confidence'])
             for rule in self.rules:
-                # calculate fitness (for comparison purposes)
-                fitness = self.calculate_fitness(rule.support, rule.confidence)
-
                 writer.writerow(
-                    [rule.antecedent, rule.consequent, fitness, rule.support, rule.confidence])
+                    [rule.antecedent, rule.consequent, rule.fitness, rule.support, rule.confidence])
 
     def generate_statistics(self):
         r"""Generate statistics for experimental purposes"""

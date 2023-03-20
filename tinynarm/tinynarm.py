@@ -82,8 +82,6 @@ class TinyNarm:
                         if rule.support > 0.0:
                             self.rules.append(rule)
 
-        self.rules.sort(key=lambda x: x.support, reverse=True)
-
     def generate_report(self):
         for f in self.feat:
             print(f"Feat INFO:\n"
