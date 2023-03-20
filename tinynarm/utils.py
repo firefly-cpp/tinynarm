@@ -15,7 +15,6 @@ class Utils:
             rule.fitness = self.calculate_fitness(rule.support, rule.confidence)
 
     def sort_rules(self):
-        self.add_fitness()
         self.rules.sort(key=lambda x: x.fitness, reverse=True)
 
     def rules_to_csv(self, filename):
