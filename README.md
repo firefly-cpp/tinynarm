@@ -1,5 +1,12 @@
 # tinyNARM
 
+---
+
+[![PyPI Version](https://img.shields.io/pypi/v/tinynarm.svg)](https://pypi.python.org/pypi/tinynarm)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/tinynarm.svg)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/tinynarm.svg)
+[![Downloads](https://pepy.tech/badge/tinynarm)](https://pepy.tech/project/tinynarm)
+
 ## About
 
 tinyNARM is an experimental effort in approaching/tailoring the classical Numerical Association Rule Mining (NARM) to limited hardware devices, e.g., ESP32 microcontrollers so that devices do not need to depend on remote servers for making decisions. Motivation mainly lies in smart agriculture, where Internet connectivity is unavailable in rural areas.
