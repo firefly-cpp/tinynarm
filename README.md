@@ -39,12 +39,15 @@ pip install tinynarm
 from tinynarm import TinyNarm
 from tinynarm.utils import Utils
 
-tinynarm = TinyNarm("new_dataset.csv")
-tinynarm.create_rules()
+tnarm = TinyNarm("new_dataset.csv")
+tnarm.create_rules()
 
-postprocess = Utils(tinynarm.rules)
+postprocess = Utils(tnarm.rules)
+postprocess.add_fitness()
+postprocess.sort_rules()
 postprocess.rules_to_csv("rules.csv")
 postprocess.generate_statistics()
+postprocess.generate_stats_report(20)
 ```
 
 ### Discretization
