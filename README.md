@@ -70,6 +70,10 @@ dataset.dataset_to_csv(data, "new_dataset.csv")
 
 [4] Stupan, Ž., Fister, I. Jr. (2022). [NiaARM: A minimalistic framework for Numerical Association Rule Mining](https://joss.theoj.org/papers/10.21105/joss.04448.pdf). Journal of Open Source Software, 7(77), 4448.
 
+## Cite us
+
+Fister Jr, I., Fister, I., Galvez, A., & Iglesias, A. (2023, August). [TinyNARM: Simplifying Numerical Association Rule Mining for Running on Microcontrollers](https://link.springer.com/chapter/10.1007/978-3-031-42529-5_12). In International Conference on Soft Computing Models in Industrial and Environmental Applications (pp. 122-131). Cham: Springer Nature Switzerland.
+
 ## License
 
 This package is distributed under the MIT License. This license can be found online at <http://www.opensource.org/licenses/MIT>.
