@@ -11,11 +11,11 @@ class Discretization:
        dataset (csv file): Dataset stored in CSV file.
        num_intervals (int): Number which defines how many intervals we create for numerical features.
    """
+
     def __init__(self, dataset, num_intervals):
         # load dataset from csv
         self.data = Dataset(dataset)
         self.num_features = len(self.data.features)
-
         self.num_intervals = num_intervals
         self.feat = []
 
@@ -31,7 +31,7 @@ class Discretization:
                 occurences = [0] * self.num_intervals
             else:
                 intervals = feature.categories
-                occurences = [0] * len(feature.categories)
+                occurences = [0] * len(intervals)
 
             self.feat.append(
                 Item(
@@ -42,48 +42,46 @@ class Discretization:
 
     def numerical_interval(self, min_val, max_val):
         r"""Create intervals for numerical feature."""
-        val_range = (max_val - min_val) / (self.num_intervals)
-        intervals = []
-        for i in range(self.num_intervals + 1):
-            intervals.append(min_val + (i * val_range))
+        val_range = (max_val - min_val) / self.num_intervals
+        intervals = [min_val + (i * val_range)
+                     for i in range(self.num_intervals + 1)]
         return intervals
 
     def generate_dataset(self):
         r"""Create new dataset."""
-
         self.create_intervals()
 
         transactions = self.data.transactions.to_numpy()
         discretized_transactions = []
+
         for transaction in transactions:
             current_transaction = []
-            for i in range(len(transaction)):
+
+            for i, val in enumerate(transaction):
                 if self.feat[i].dtype == "cat":
-                    current_transaction.append(transaction[i])
+                    current_transaction.append(val)
                 else:
                     intervals = self.feat[i].intervals
                     id_interval = 1
+
                     for j in range(len(intervals) - 1):
-                        if ((transaction[i] >= intervals[j])
-                                and (transaction[i] < intervals[j+1])):
+                        if intervals[j] <= val < intervals[j+1]:
                             curr = "interval_" + str(id_interval)
                             current_transaction.append(curr)
                             break
-                        else:
-                            id_interval += 1
-                    if transaction[i] == intervals[len(intervals)-1]: # TODO: CHECK
+                        id_interval += 1
+                    else:
                         curr = "interval_" + str(id_interval-1)
                         current_transaction.append(curr)
+
             discretized_transactions.append(current_transaction)
+
         return discretized_transactions
 
     def dataset_to_csv(self, transactions, filename):
         r"""Store dataset to CSV file."""
-        with open(filename, 'w',) as csvfile:
+        with open(filename, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            header = []
-            for i in range(self.num_features):
-                header.append(self.data.features[i].name)
+            header = [feature.name for feature in self.data.features]
             writer.writerow(header)
-            for transaction in transactions:
-                writer.writerow(transaction)
+            writer.writerows(transactions)
