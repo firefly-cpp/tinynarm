@@ -60,7 +60,7 @@ data = dataset.generate_dataset()
 dataset.dataset_to_csv(data, "new_dataset.csv")
 ```
 
-## NARM references
+## References
 
 [1] I. Fister Jr., A. Iglesias, A. Gálvez, J. Del Ser, E. Osaba, I Fister. [Differential evolution for association rule mining using categorical and numerical attributes](http://www.iztok-jr-fister.eu/static/publications/231.pdf) In: Intelligent data engineering and automated learning - IDEAL 2018, pp. 79-88, 2018.
 
@@ -72,7 +72,7 @@ dataset.dataset_to_csv(data, "new_dataset.csv")
 
 ## Cite us
 
-Fister Jr, I., Fister, I., Galvez, A., & Iglesias, A. (2023, August). [TinyNARM: Simplifying Numerical Association Rule Mining for Running on Microcontrollers](https://link.springer.com/chapter/10.1007/978-3-031-42529-5_12). In International Conference on Soft Computing Models in Industrial and Environmental Applications (pp. 122-131). Cham: Springer Nature Switzerland.
+Fister Jr, I., Fister, I., Galvez, A., & Iglesias, A. (2023, August). [TinyNARM: Simplifying Numerical Association Rule Mining for Running on Microcontrollers](https://www.iztok.xyz/static/publications/313.pdf). In International Conference on Soft Computing Models in Industrial and Environmental Applications (pp. 122-131). Cham: Springer Nature Switzerland.
 
 ## License
 
