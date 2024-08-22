@@ -1,26 +1,36 @@
-<h1 align="center">
-    tinyNARM
-</h1>
+<div align="center">
+    <h1 align="center">
+        tinyNARM
+    </h1>
+</div>
 
-<p align="center">
-    <a href="https://pypi.python.org/pypi/tinynarm">
-        <img alt="PyPI Version" src="https://img.shields.io/pypi/v/tinynarm.svg">
-    </a>
-    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/tinynarm.svg">
-    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/tinynarm.svg">
-    <a href="https://pepy.tech/project/tinynarm">
-        <img alt="Downloads" src="https://pepy.tech/badge/tinynarm">
-    </a>
-</p>
+<div align="center">
+    <p align="center">
+        <a href="https://pypi.python.org/pypi/tinynarm">
+            <img alt="PyPI Version" src="https://img.shields.io/pypi/v/tinynarm.svg">
+        </a>
+        <a href="#">
+            <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/tinynarm.svg">
+        </a>
+        <a href="#">
+            <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/tinynarm.svg">
+        </a>
+        <a href="https://pepy.tech/project/tinynarm">
+            <img alt="Downloads" src="https://pepy.tech/badge/tinynarm">
+        </a>
+    </p>
+</div>
 
-<p align="center">
-    <a href="#-detailed-insights">🔍 Detailed insights</a> •
-    <a href="#-installation">📦 Installation</a> •
-    <a href="#-usage">🚀 Usage</a> •
-    <a href="#-license">🔑 License</a> •
-    <a href="#-cite-us">📄 Cite us</a> •
-    <a href="#-references">📝 References</a>
-</p>
+<div align="center">
+    <p align="center">
+        <a href="#-detailed-insights">🔍 Detailed insights</a> •
+        <a href="#-installation">📦 Installation</a> •
+        <a href="#-usage">🚀 Usage</a> •
+        <a href="#-license">🔑 License</a> •
+        <a href="#-cite-us">📄 Cite us</a> •
+        <a href="#-references">📝 References</a>
+    </p>
+</div>
 
 tinyNARM is an experimental effort in approaching/tailoring the classical Numerical Association Rule Mining (NARM) to limited hardware devices, e.g., ESP32 microcontrollers so that devices do not need to depend on remote servers for making decisions. Motivation mainly lies in smart agriculture, where Internet connectivity is unavailable in rural areas.
 
