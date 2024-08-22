@@ -7,14 +7,15 @@ from tinynarm.item import Item
 class TinyNarm:
     r"""Main class for tinyNARM approach.
 
-   Args:
-       dataset (csv file): Dataset stored in csv file.
-       num_intervals (int): Number which defines how many intervals we create for numerical features.
+    Args:
+       dataset (str): Path to dataset (CSV file).
+       log (bool, optional): Logging of association rules. False by default.
    """
 
-    def __init__(self, dataset):
+    def __init__(self, dataset, log=False):
         # load dataset from csv
         self.data = Dataset(dataset)
+        self.log = log
         self.num_features = len(self.data.features)
         self.feat = []
         self.rules = []
@@ -58,6 +59,8 @@ class TinyNarm:
                                 transactions=self.data.transactions)
                     if rule.support > 0.0:
                         self.rules.append(rule)
+                        if self.log:
+                            print(rule)
             else:
                 for j in comb:
                     for cut in range(1, i - 1):
