@@ -49,17 +49,19 @@ class TestSportydatagenDiscretizationA(TestCase):
         classes_average_hr = []
 
         duration = [
-            'interval_1',
-            'interval_1',
-            'interval_3',
-            'interval_3',
-            'interval_3']
+            'duration[54.0,60.71111111]',
+            'duration[54.0,60.71111111]',
+            'duration[67.42222222,74.13333333]',
+            'duration[67.42222222,74.13333333]',
+            'duration[67.42222222,74.13333333]'
+        ]
         average_hr = [
-            'interval_2',
-            'interval_2',
-            'interval_3',
-            'interval_2',
-            'interval_1']
+            'average_hr[114.33333333333333,131.66666666666666]',
+            'average_hr[114.33333333333333,131.66666666666666]',
+            'average_hr[131.66666666666666,149.0]',
+            'average_hr[114.33333333333333,131.66666666666666]',
+            'average_hr[97.0,114.33333333333333]'
+        ]
 
         for i in range(len(self.transactions)):
             classes_duration.append(self.transactions[i][0])
@@ -105,20 +107,23 @@ class TestSportydatagenDiscretizationB(TestCase):
         classes_average_hr = []
 
         duration = [
-            'interval_1',
-            'interval_1',
-            'interval_4',
-            'interval_5',
-            'interval_5']
+            'duration[54.0,58.026666666]',
+            'duration[54.0,58.026666666]',
+            'duration[66.079999998,70.106666664]',
+            'duration[70.106666664,74.13333333]',
+            'duration[70.106666664,74.13333333]'
+        ]
         average_hr = [
-            'interval_2',
-            'interval_3',
-            'interval_5',
-            'interval_2',
-            'interval_1']
+            'average_hr[107.4,117.8]',
+            'average_hr[117.8,128.2]',
+            'average_hr[138.6,149.0]',
+            'average_hr[107.4,117.8]',
+            'average_hr[97.0,107.4]'
+        ]
 
         for i in range(len(self.transactions)):
             classes_duration.append(self.transactions[i][0])
             classes_average_hr.append(self.transactions[i][2])
+
         assert classes_duration == duration, "Not correct"
         assert classes_average_hr == average_hr, "Not correct"

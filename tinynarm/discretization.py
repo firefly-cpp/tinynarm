@@ -1,7 +1,6 @@
-from niaarm import Dataset, Feature, Rule
+from niaarm import Dataset
 from tinynarm.item import Item
 import csv
-import sys
 
 
 class Discretization:
@@ -62,16 +61,21 @@ class Discretization:
                     current_transaction.append(val)
                 else:
                     intervals = self.feat[i].intervals
+                    attribute = self.feat[i].name
                     id_interval = 1
 
                     for j in range(len(intervals) - 1):
                         if intervals[j] <= val < intervals[j+1]:
-                            curr = "interval_" + str(id_interval)
+                            lower = intervals[j]
+                            upper = intervals[j+1]
+                            curr = f"{attribute}[{lower},{upper}]"
                             current_transaction.append(curr)
                             break
                         id_interval += 1
                     else:
-                        curr = "interval_" + str(id_interval-1)
+                        lower = intervals[j]
+                        upper = intervals[j+1]
+                        curr = f"{attribute}[{lower},{upper}]"
                         current_transaction.append(curr)
 
             discretized_transactions.append(current_transaction)
