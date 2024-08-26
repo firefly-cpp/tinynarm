@@ -60,7 +60,7 @@ class TinyNarm:
                     if rule.support > 0.0:
                         self.rules.append(rule)
                         if self.log:
-                            print(rule)
+                            print(rule, rule.support)
             else:
                 for j in comb:
                     for cut in range(1, i - 1):
