@@ -68,14 +68,14 @@ class Discretization:
                         if intervals[j] <= val < intervals[j+1]:
                             lower = intervals[j]
                             upper = intervals[j+1]
-                            curr = f"{attribute}[{lower},{upper}]"
+                            curr = f"[{lower},{upper}]"
                             current_transaction.append(curr)
                             break
                         id_interval += 1
                     else:
                         lower = intervals[j]
                         upper = intervals[j+1]
-                        curr = f"{attribute}[{lower},{upper}]"
+                        curr = f"[{lower},{upper}]"
                         current_transaction.append(curr)
 
             discretized_transactions.append(current_transaction)
