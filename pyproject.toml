@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "tinynarm"
-version = "0.3.1"
+version = "0.3.2"
 description = "Simplify numerical association rule mining"
 authors = ["Iztok Fister Jr. <iztok@iztok-jr-fister.eu>"]
 keywords = ['association rule mining', 'data science', 'numerical association rule mining', 'tinyML']
-homepage = "https://gitlab.com/firefly-cpp/tinynarm"
-repository = "https://gitlab.com/firefly-cpp/tinynarm"
+homepage = "https://github.com/firefly-cpp/tinynarm"
+repository = "https://github.com/firefly-cpp/tinynarm"
 readme = "README.md"
 
 include = [
