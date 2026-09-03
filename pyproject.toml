@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "tinynarm"
 version = "0.3.2"
-description = "Simplify numerical association rule mining"
+description = "Lightweight numerical association rule mining for resource-constrained devices"
 authors = ["Iztok Fister Jr. <iztok@iztok-jr-fister.eu>"]
 keywords = ['association rule mining', 'data science', 'numerical association rule mining', 'tinyML']
 homepage = "https://github.com/firefly-cpp/tinynarm"
@@ -14,8 +14,8 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-niaarm = "^0.3.9"
+python = ">=3.11,<4.0"
+niaarm = "^0.4.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
