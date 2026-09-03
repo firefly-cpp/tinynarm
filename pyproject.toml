@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tinynarm"
-version = "0.3.2"
+version = "0.3.3"
 description = "Lightweight numerical association rule mining for resource-constrained devices"
 authors = ["Iztok Fister Jr. <iztok@iztok-jr-fister.eu>"]
 keywords = ['association rule mining', 'data science', 'numerical association rule mining', 'tinyML']
